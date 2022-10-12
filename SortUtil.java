@@ -52,13 +52,38 @@ public class SortUtil {
      */
     public static ArrayList<Integer> mergeSort(ArrayList<Integer> aList){
         // If the list is size 1, return a copy of the list
+        if (aList.size() == 1) {
+            return new ArrayList<>(aList);
+        }
         // If the list is size 0, return an empty list
+        else if (aList.size() == 0) {
+            return new ArrayList<Integer>();
+        }
         // Else
-        // choose a midpoint to split the list
-        // make a new list (copy) with all elements from first half, and another new list (copy) with all elements from 2nd half
-        // call merge sort on each of these new lists
-        // call merge on the result sorted lists 
-        throw new RuntimeException("Not implemented yet");
+        else {
+            // choose a midpoint to split the list
+            int midPoint = aList.size()/2;
+
+            // make a new list (copy) with all elements from first half, and another new list (copy) with all elements from 2nd half
+            ArrayList<Integer> firstHalf = new ArrayList<Integer>();
+            ArrayList<Integer> secondHalf = new ArrayList<Integer>();
+
+            for (int i=0; i<midPoint; i++) {
+                firstHalf.add(aList.get(i));
+            }
+            for (int i=midPoint; i<aList.size(); i++) {
+                secondHalf.add(aList.get(i));
+            }
+            // call merge sort on each of these new lists
+            firstHalf = mergeSort(firstHalf);
+            secondHalf = mergeSort(secondHalf);
+
+            // call merge on the result sorted lists 
+            ArrayList<Integer> sortedList = merge(firstHalf, secondHalf);
+
+            return sortedList;
+        }
+        // throw new RuntimeException("Not");
     }
 
 
